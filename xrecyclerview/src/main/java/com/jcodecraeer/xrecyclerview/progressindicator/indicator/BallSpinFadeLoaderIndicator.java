@@ -82,7 +82,7 @@ public class BallSpinFadeLoaderIndicator extends BaseIndicatorController {
                     postInvalidate();
                 }
             });
-            scaleAnim.start();
+        //    scaleAnim.start();
 
             ValueAnimator alphaAnim=ValueAnimator.ofInt(255, 77, 255);
             alphaAnim.setDuration(1000);
@@ -95,7 +95,7 @@ public class BallSpinFadeLoaderIndicator extends BaseIndicatorController {
                     postInvalidate();
                 }
             });
-            alphaAnim.start();
+         //   alphaAnim.start();
             animators.add(scaleAnim);
             animators.add(alphaAnim);
         }

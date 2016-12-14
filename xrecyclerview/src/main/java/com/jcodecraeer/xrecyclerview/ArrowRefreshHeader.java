@@ -4,6 +4,7 @@ import android.animation.ValueAnimator;
 import android.content.Context;
 import android.os.Handler;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -87,13 +88,18 @@ public class ArrowRefreshHeader extends LinearLayout implements BaseRefreshHeade
 		mMeasuredHeight = getMeasuredHeight();
 	}
 
+    AVLoadingIndicatorView mPy;
+    ProgressBar SysProgress;
     public void setProgressStyle(int style) {
         if(style == ProgressStyle.SysProgress){
-            mProgressBar.setView(new ProgressBar(getContext(), null, android.R.attr.progressBarStyle));
+            Log.e("xiayu","SysProgress");
+            SysProgress = new ProgressBar(getContext(), null, android.R.attr.progressBarStyle);
+            mProgressBar.setView(SysProgress);
         }else{
             AVLoadingIndicatorView progressView = new  AVLoadingIndicatorView(this.getContext());
             progressView.setIndicatorColor(0xffB5B5B5);
             progressView.setIndicatorId(style);
+            mPy = progressView;
             mProgressBar.setView(progressView);
         }
     }
@@ -103,20 +109,27 @@ public class ArrowRefreshHeader extends LinearLayout implements BaseRefreshHeade
     }
 
 	public void setState(int state) {
+        Log.e("xiayu","state:"+state);
 		if (state == mState) return ;
 
 		if (state == STATE_REFRESHING) {	// 显示进度
 			mArrowImageView.clearAnimation();
 			mArrowImageView.setVisibility(View.INVISIBLE);
 			mProgressBar.setVisibility(View.VISIBLE);
+           // ((AVLoadingIndicatorView)mProgressBar.getRootView()).start();
+            mPy.start();
             smoothScrollTo(mMeasuredHeight);
 		} else if(state == STATE_DONE) {
             mArrowImageView.setVisibility(View.INVISIBLE);
             mProgressBar.setVisibility(View.INVISIBLE);
+            mPy.end();
+
         } else {	// 显示箭头图片
 			mArrowImageView.setVisibility(View.VISIBLE);
 			mProgressBar.setVisibility(View.INVISIBLE);
-		}
+            mPy.end();
+
+        }
 		
 		switch(state){
             case STATE_NORMAL:

@@ -75,14 +75,15 @@ public class LoadingMoreFooter extends LinearLayout {
         addView(mText);
     }
 
+    AVLoadingIndicatorView Mpy;
     public void setProgressStyle(int style) {
         if(style == ProgressStyle.SysProgress){
             progressCon.setView(new ProgressBar(getContext(), null, android.R.attr.progressBarStyle));
         }else{
-            AVLoadingIndicatorView progressView = new  AVLoadingIndicatorView(this.getContext());
-            progressView.setIndicatorColor(0xffB5B5B5);
-            progressView.setIndicatorId(style);
-            progressCon.setView(progressView);
+            Mpy = new  AVLoadingIndicatorView(this.getContext());
+            Mpy.setIndicatorColor(0xffB5B5B5);
+            Mpy.setIndicatorId(style);
+            progressCon.setView(Mpy);
         }
     }
 
@@ -90,16 +91,20 @@ public class LoadingMoreFooter extends LinearLayout {
         switch(state) {
             case STATE_LOADING:
                 progressCon.setVisibility(View.VISIBLE);
+                Mpy.start();
                 mText.setText(loadingHint);
                 this.setVisibility(View.VISIBLE);
                     break;
             case STATE_COMPLETE:
                 mText.setText(loadingDoneHint);
                 this.setVisibility(View.GONE);
+                Mpy.end();
+
                 break;
             case STATE_NOMORE:
                 mText.setText(noMoreHint);
                 progressCon.setVisibility(View.GONE);
+                Mpy.end();
                 this.setVisibility(View.VISIBLE);
                 break;
         }

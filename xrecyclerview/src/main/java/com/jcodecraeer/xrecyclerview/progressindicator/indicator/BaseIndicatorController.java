@@ -3,7 +3,9 @@ package com.jcodecraeer.xrecyclerview.progressindicator.indicator;
 import android.animation.Animator;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.util.Log;
 import android.view.View;
+
 import java.util.List;
 
 /**
@@ -61,7 +63,8 @@ public abstract class BaseIndicatorController {
      * be onDetachedFromWindow.
      * @param animStatus
      */
-    public void setAnimationStatus(AnimStatus animStatus){
+    public void  setAnimationStatus(AnimStatus animStatus){
+        Log.e("xiayu","this:"+this+"      mAnimators;"+mAnimators);
         if (mAnimators==null){
             return;
         }
@@ -69,14 +72,18 @@ public abstract class BaseIndicatorController {
         for (int i = 0; i < count; i++) {
             Animator animator=mAnimators.get(i);
             boolean isRunning=animator.isRunning();
+            Log.e("xiayu","isRunning:"+isRunning);
+
             switch (animStatus){
                 case START:
                     if (!isRunning){
+                        Log.e("xiayu", "isRunning_START");
                         animator.start();
                     }
                     break;
                 case END:
                     if (isRunning){
+                        Log.e("xiayu", "isRunning_END");
                         animator.end();
                     }
                     break;

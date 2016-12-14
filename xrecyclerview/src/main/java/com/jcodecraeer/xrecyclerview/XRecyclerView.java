@@ -11,12 +11,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
-import android.widget.ScrollView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -200,13 +198,13 @@ public class XRecyclerView extends RecyclerView {
     }
 
     //避免用户自己调用getAdapter() 引起的ClassCastException
-    @Override
+/*   @Override
     public Adapter getAdapter() {
         if(mWrapAdapter != null)
             return mWrapAdapter.getOriginalAdapter();
         else
             return null;
-    }
+    }*/
 
     @Override
     public void setLayoutManager(LayoutManager layout) {

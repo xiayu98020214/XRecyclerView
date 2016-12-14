@@ -55,12 +55,12 @@ public class BallRotateIndicator extends BaseIndicatorController{
                 postInvalidate();
             }
         });
-        scaleAnim.start();
+      //  scaleAnim.start();
 
         ObjectAnimator rotateAnim=ObjectAnimator.ofFloat(getTarget(),"rotation",0,180,360);
         rotateAnim.setDuration(1000);
         rotateAnim.setRepeatCount(-1);
-        rotateAnim.start();
+      //  rotateAnim.start();
 
         animators.add(scaleAnim);
         animators.add(rotateAnim);

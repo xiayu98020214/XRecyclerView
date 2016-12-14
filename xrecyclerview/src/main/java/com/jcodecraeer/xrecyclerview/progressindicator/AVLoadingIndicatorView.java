@@ -9,6 +9,7 @@ import android.graphics.Paint;
 import android.os.Build;
 import android.support.annotation.IntDef;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 import com.jcodecraeer.xrecyclerview.R;
@@ -189,6 +190,7 @@ public class AVLoadingIndicatorView extends View{
     }
 
     public void setIndicatorId(int  indicatorId){
+        Log.e("xiayu","setIndicatorId:"+indicatorId);
         mIndicatorId = indicatorId;
         applyIndicator();
     }
@@ -325,28 +327,43 @@ public class AVLoadingIndicatorView extends View{
         }
     }
 
-    @Override
+/*    @Override
     public void setVisibility(int v) {
-        if (getVisibility() != v) {
+
             super.setVisibility(v);
+        Log.e("xiayu","setVisibility v"+v);
             if (v == GONE || v == INVISIBLE) {
+                Log.e("xiayu","setVisibility END");
                 mIndicatorController.setAnimationStatus(BaseIndicatorController.AnimStatus.END);
             } else {
+                Log.e("xiayu","setVisibility START");
                 mIndicatorController.setAnimationStatus(BaseIndicatorController.AnimStatus.START);
             }
-        }
+
+    }*/
+    public void start(){
+        mIndicatorController.setAnimationStatus(BaseIndicatorController.AnimStatus.START);
+
     }
+
+    public void end(){
+        mIndicatorController.setAnimationStatus(BaseIndicatorController.AnimStatus.END);
+
+    }
+
 
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-        mIndicatorController.setAnimationStatus(BaseIndicatorController.AnimStatus.CANCEL);
+       // Log.e("xiayu","onDetachedFromWindow");
+       // mIndicatorController.setAnimationStatus(BaseIndicatorController.AnimStatus.CANCEL);
     }
 
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-        mIndicatorController.setAnimationStatus(BaseIndicatorController.AnimStatus.START);
+      //  Log.e("xiayu","onAttachedToWindow");
+        //mIndicatorController.setAnimationStatus(BaseIndicatorController.AnimStatus.START);
     }
 
     void drawIndicator(Canvas canvas){
@@ -354,6 +371,7 @@ public class AVLoadingIndicatorView extends View{
     }
 
     void applyAnimation(){
+        Log.e("xiayu","applyAnimation:"+this);
         mIndicatorController.initAnimation();
     }
 
